@@ -1,0 +1,6 @@
+\copy (SELECT * FROM "Artist") TO '/workspace/home/scripts/Artist.csv' WITH (FORMAT CSV, HEADER)
+\copy (SELECT * FROM "Venue") TO '/workspace/home/scripts/Venue.csv' WITH (FORMAT CSV, HEADER)
+\copy (SELECT * FROM "ArtistGenre") TO '/workspace/home/scripts/ArtistGenre.csv' WITH (FORMAT CSV, HEADER)
+\copy (SELECT * FROM "VenueGenre") TO '/workspace/home/scripts/VenueGenre.csv' WITH (FORMAT CSV, HEADER)
+\copy (SELECT * FROM "Show") TO '/workspace/home/scripts/Show.csv' WITH (FORMAT CSV, HEADER)
+\copy (SELECT * FROM "Genre") TO '/workspace/home/scripts/Genre.csv' WITH (FORMAT CSV, HEADER)
