@@ -572,7 +572,7 @@ def edit_artist_submission(artist_id):
 
       # Set default value for seeking_venue if it's not found in the form data
       if 'seeking_venue' not in request.form:
-          form.seeking_venue.data = 'False'
+          form.seeking_venue.data = False
       
       if form.validate():
           try:
@@ -831,19 +831,28 @@ def create_show_submission():
 
   if form.validate():
       try:
-          # Create a new Form object with the form data
-          form = Form(
+          # Create a new Show object with the form data
+          # Retrieve the maximum ID value from the database table
+          max_id = db.session.query(db.func.max(Show.id)).scalar()
+
+          # Increment the maximum ID value by 1 to generate the ID for the new venue
+          new_id = max_id + 1 if max_id is not None else 1
+        
+        
+          # Create a new Show object with the form data
+          show = Show(
+              id=new_id,
               artist_id =form.artist_id.data,
               venue_id =form.venue_id.data,
               start_time =form.start_time.data
           )
 
-          # Add the form to the database
-          db.session.add(form)
+          # Add the show to the database
+          db.session.add(show)
           db.session.commit()
 
           # on successful db insert, flash success
-          flash('Form ' + form.name.data + ' was successfully listed!')
+          flash('Form id' + str(new_id) + ' was successfully listed!')
         
           return render_template('pages/home.html')
       except Exception as e:
@@ -852,7 +861,7 @@ def create_show_submission():
           # Print the exception error
           print(str(e))
           # Flash error message
-          flash('An error occurred. Form ' + form.name.data + ' could not be listed.')
+          flash('An error occurred. Form id ' + str(new_id) + ' could not be listed.')
   else:
       for field, errors in form.errors.items():
           for error in errors:
