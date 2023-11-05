@@ -147,5 +147,10 @@ export FLASK_ENV=development # enables debug mode
 python3 app.py
 ```
 
-3. **Verify on the Browser**<br>
+3. **Create seed data:**
+```
+python3 scripts/create_data.py
+```
+
+4. **Verify on the Browser**<br>
 Navigate to project homepage in the virtual desktop (by clicking the DESKTOP button in the workspace) [http://127.0.0.1:5000/] (http://127.0.0.1:5000/) or [http://localhost:5000](http://localhost:5000) or in your local virtual environment. 
